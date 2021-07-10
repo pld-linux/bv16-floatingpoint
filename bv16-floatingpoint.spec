@@ -14,6 +14,7 @@ Group:		Libraries
 #Source0Download: https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint/-/tags
 Source0:	https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint/-/archive/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	359b6088c38524aae17822856b1bd219
+Patch0:		%{name}-libdir.patch
 URL:		https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint
 BuildRequires:	cmake >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -50,6 +51,7 @@ Statyczna biblioteka bv16.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d build
