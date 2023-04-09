@@ -5,7 +5,7 @@
 Summary:	BroadVoice16 floating point codec
 Summary(pl.UTF-8):	Kodek BroadVoice16 z arytmetyką zmiennoprzecinkową
 Name:		bv16-floatingpoint
-Version:	1.2
+Version:	2.1
 Release:	1
 License:	BSD
 Group:		Libraries
@@ -13,10 +13,10 @@ Group:		Libraries
 # linphone added cmake build
 #Source0Download: https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint/-/tags
 Source0:	https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	359b6088c38524aae17822856b1bd219
-Patch0:		%{name}-libdir.patch
+# Source0-md5:	b28dd02e633cd71136c32cacc2797566
 URL:		https://gitlab.linphone.org/BC/public/external/bv16-floatingpoint
 BuildRequires:	cmake >= 3.0
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,13 +51,13 @@ Statyczna biblioteka bv16.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
-	%{!?with_static_libs:-DENABLE_STATIC=OFF}
+	%{!?with_static_libs:-DENABLE_STATIC=OFF} \
+	-DENABLE_TOOLS=ON \
 
 %{__make}
 
